@@ -1,0 +1,83 @@
+{
+  "Medical": [
+    {
+      "word": {
+        "word": "Good",
+        "translation": "ভালো",
+        "synonyms": ["Better", "Best", "Genuine"],
+        "antonyms": ["Worst", "Bad", "Poor"],
+        "story-block": "story block goes here"
+      }
+    },{
+      "word": {
+        "word": "Good",
+        "translation": "ভালো",
+        "synonyms": ["Better", "Best", "Genuine"],
+        "antonyms": ["Worst", "Bad", "Poor"],
+        "story-block": "story block goes here"
+      }
+    },{
+      "word": {
+        "word": "Good",
+        "translation": "ভালো",
+        "synonyms": ["Better", "Best", "Genuine"],
+        "antonyms": ["Worst", "Bad", "Poor"],
+        "story-block": "story block goes here"
+      }
+    },
+    {
+      "title": "Medical Related Words"
+    },{
+      "word": {
+        "word": "Good",
+        "translation": "ভালো",
+        "synonyms": ["Better", "Best", "Genuine"],
+        "antonyms": ["Worst", "Bad", "Poor"],
+        "story-block": "story <b>block</b> goes here"
+      }
+    },
+    {
+      "title-extra": {
+        "title": "Success is a seris of Action",
+        "content": "আমি জানি তুমি জানো সাক্সেস হচ্ছে একটা একতানিস্টহ সাধনার ফল তাই কষ্ট পেয়ো না বন্ধু লেগে থাকো dinseshe sofolota tomari hobe bondhu",
+        "image": "https://quotefancy.com/media/wallpaper/3840x2160/6360638-Albert-Einstein-Quote-You-never-fail-until-you-stop-trying.jpg"
+      }
+    },{
+      "word": {
+        "word": "Good",
+        "translation": "ভালো",
+        "synonyms": ["Better", "Best", "Genuine"],
+        "antonyms": ["Worst", "Bad", "Poor"],
+        "story-block": "story block goes here"
+      }
+    },{
+      "word": {
+        "word": "Good",
+        "translation": "ভালো",
+        "synonyms": ["Better", "Best", "Genuine"],
+        "antonyms": ["Worst", "Bad", "Poor"],
+        "story-block": "story block goes here"
+      }
+    }
+  ],
+  "IBA": [
+    {
+      "word": {
+        "word": "Good",
+        "translation": "ভালো",
+        "synonyms": ["Better", "Best", "Genuine"],
+        "antonyms": ["Worst", "Bad", "Poor"],
+        "story-block": "story block goes here"
+      }
+    },
+    {
+      "title": "title goes here"
+    },
+    {
+      "title-extra": {
+        "title": "title goes here",
+        "content": "content goes here"
+      }
+    }
+  ]
+}

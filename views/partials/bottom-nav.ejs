@@ -1,0 +1,130 @@
+<style>
+    nav.bottom-nav{
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      position: fixed;
+      bottom: 0px;
+      border-top: 1px solid rgb(10, 10, 10 / 20%);
+      border-top-left-radius : 12px;
+    border-top-right-radius : 12px;
+    background-color:rgba(255, 255, 255, 0.8) !important;
+      z-index: 1111;
+      backdrop-filter: blur(8px); /* add a blur effect */
+      box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px !important;
+      font-family: 'Roboto', sans-serif;
+
+    
+    }
+    .nav-item{
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      padding: 10px 5px 10px 5px;
+      width: 100%;
+      color: white!important;
+    
+    }
+    .nav-Item{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 14px 10px 8px 10px;
+      width: 100%;
+    
+    }
+    .nav-Item i{
+      font-size: 20px;
+    color: rgb(57 57 75);
+    margin-bottom:5px;
+    }
+    .nav-Item span{
+      font-size: 12px;
+    color: rgb(57 57 75);
+    }
+    /* ripple effect */
+    .ripple {
+    background-position: center;
+    transition: background 0.8s;
+    }
+    
+    .ripple:hover{
+    background-color: #e4e4e4;
+    background-image: radial-gradient(circle,transparent 1%,#e4e4e4 1%);
+    background-position: center;
+    outline: none;
+    border-radius: 50px;
+    background-size: 15000%;
+    }
+    
+    .ripple:active{
+    transition: background 0s;
+    background-color: #949494;    
+    background-size: 100%;
+    }
+    
+    
+    
+    
+    @media (min-width: 600px) {
+        nav.bottom-nav {
+        width: 40%!important;
+        margin: 0 auto;
+        position: fixed;
+        bottom: 10px!important;
+        border-radius: 10px;
+        left: 30%;
+        
+      }
+     
+    }
+    
+    
+    @media (min-width: 700px) {
+    nav.bottom-nav {
+        width: 40%!important;
+        margin: 0 auto;
+        position: fixed;
+        bottom: 10px!important;
+        border-radius: 10px;
+        left: 30%;
+        
+      }
+     
+      }
+    
+    </style>
+    
+    <section class="Bottom-Navigatoin">
+      <nav class="bottom-nav">
+        <a class="nav-Item ripple" href="/">
+          <i class="fa-solid fa-book"></i>
+          <span>Vocabulary</span>
+        </a>
+      
+        <a class="nav-Item ripple" href="/hsc/science">
+          <i class="fa-regular fa-circle-play"></i>
+          <span>A-Unit</span>
+        </a>
+      
+        <a class="nav-Item ripple" href="/hsc/commerce">
+          <i class="fa-regular fa-circle-play"></i>
+          <span>B-Unit</span>
+        </a>
+      
+        <a class="nav-Item ripple" href="/hsc/arts">
+          <i class="fa-regular fa-circle-play"></i>
+          <span>C-Unit</span>
+        </a>
+        
+        <a class="nav-Item ripple" href="/hsc/arts">
+          <i class="fa-regular fa-circle-play"></i>
+          <span>D-Unit</span>
+        </a>
+      </nav>
+      
+     </section>
+    
+    

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- HTML Meta Tags -->
+<title>Material Student - Be your best version</title>
+<meta name="description" content="জরুরী অবস্থায় রক্ত দানে এগিয়ে আসি সবাই, আপনার রক্তদানে বেচে জেতে পারে একটি মানুষের জীবন।">
+
+<!-- Facebook Meta Tags -->
+<meta property="og:url" content="https://roktoo.com">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Roktoo - রক্ত দেই, জীবন বাঁচাই">
+<meta property="og:description" content="জরুরী অবস্থায় রক্ত দানে এগিয়ে আসি সবাই, আপনার রক্তদানে বেচে জেতে পারে একটি মানুষের জীবন।">
+<meta property="og:image" content="https://roktoo.com/images/web-preview-2.png" />
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:domain" content="roktoo.com">
+<meta property="twitter:url" content="https://roktoo.com">
+<meta name="twitter:title" content="Roktoo - Save Lives with Blood Donation">
+<meta name="twitter:description" content="জরুরী অবস্থায় রক্ত দানে এগিয়ে আসি সবাই, আপনার রক্তদানে বেচে জেতে পারে একটি মানুষের জীবন।">
+<meta name="twitter:image" content="https://roktoo.com/images/web-preview-2.png">
+  
+
+  <link href="/images/favicon.png" rel="icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.maateen.me/kalpurush/font.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+
+
+<style>
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+a, a:hover, a:active, a:link, a:visited {
+  text-decoration: none !important;
+  color: black;
+ }
+
+.action-buttons {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.action-buttons button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.new-btn {
+    background-color: rgb(0, 0, 0);
+    border-radius: 5px !important;
+    color: white !important;
+}
+
+.new-btn:hover {
+    background-color: #212121 !important;
+    color: rgb(255, 255, 255) !important;
+}
+
+
+#accordion-container {
+    padding: 0;
+    width: 52%;
+    margin: 0px auto;
+}
+
+/* General Accordion Header */
+.accordion-header {
+    background-color: #f1f1f1;
+    color: #444;
+    cursor: pointer;
+    padding: 15px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: background-color 0.3s ease;
+    position: relative;
+   }
+.accordion.accordion-subject{
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+  margin-bottom: 10px;
+}
+.accordion-header:hover {
+    background-color: #ccc;
+}
+.accordion-arrow {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #444; /* Arrow pointing down */
+    display: inline-block;
+    transition: transform 0.3s ease;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.accordion-header.active .accordion-arrow {
+    transform: translateY(-50%) rotate(-90deg); /* Arrow pointing to the right */
+}
+
+/* General Accordion Content */
+.accordion-content {
+    display: none;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.accordion-content p {
+    margin: 15px 0;
+}
+
+/* Styles for Subjects */
+.accordion-subject .accordion-header {
+    background-color: #ffffff;
+}
+
+.accordion-subject .accordion-content {
+    margin-left: 0; /* Align with header */
+}
+
+/* Styles for Chapters */
+.accordion-chapter {
+    position: relative;
+    padding-left: 40px; /* Space for the vertical line and dot */
+    margin: 5px 0px 0px 0px; /* Space between chapters */
+}
+
+.accordion-chapter::before {
+    content: '';
+    position: absolute;
+    left: 20px; /* Position of the vertical line */
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: #c3c3c3;
+    height: 110%;
+}
+
+.accordion-chapter::after {
+    content: '';
+    position: absolute;
+    left: 15px; /* Position of the dot */
+    top: 20px; /* Align the dot with the vertical line */
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ff006d;
+}
+
+/* Remove extra margin for the first child (root level) */
+.accordion-subject:first-child .accordion-chapter::before {
+    top: 0;
+    bottom: 20px;
+}
+
+.accordion-chapter .accordion-header {
+    background-color: #f9f9f9;
+    border-radius: 0;
+    width: 100%;
+}
+
+/* Styles for Teachers */
+.teacher-list {
+    padding: 0px;
+    border-radius: 0px 0px 7px 7px;
+    padding-left: 15px;
+}
+
+.teacher-list a {
+  margin: 10px 5px;
+    font-size: 15px;
+    color: #333;
+    display: block;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+
+
+
+
+/* .course-details{
+  margin: 0px auto;
+  padding: 20px;
+  text-align: center;
+} */
+
+.course-details{
+  margin-left: 380px;
+}
+
+
+/* Custom Scrollbar for WebKit Browsers */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #e0e0e0;
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #264f6d;
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #264f6d;
+}
+
+::-webkit-scrollbar-corner {
+    background: #e0e0e0;
+}
+
+/* Custom Scrollbar for Firefox */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #264f6d #e0e0e0;
+}
+
+
+
+
+.side-nav {
+  position: fixed!important;
+  top: 110px!important;
+  left: 60px!important;
+  width: 250px;
+  background-color: #ffffff;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+  overflow-y: auto;
+  font-family: 'Roboto', sans-serif;
+  z-index: 1000;
+  display: block;
+  border-radius: 5px;
+}
+
+.nav-header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+.nav-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-itemm {
+  padding: 10px 15px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 4px;
+  color: black!important;
+}
+
+.nav-itemm:hover {
+  background-color: #ddd;
+}
+
+.nav-itemm.active {
+  background-color: #27384d;
+  color: white!important;
+}
+
+@media (max-width: 900px) {
+  .side-nav {
+    display: none; 
+  }
+
+  .course-details {
+    margin: 0px auto;
+    padding: 15px;
+    text-align: center;
+  }
+
+  #accordion-container {
+    margin: 0px auto!important;
+    width: 80%;
+  }
+
+}
+</style>
+</head>
+
+<body>
+    <%- include('partials/top-nav') %>
+
+<br><br><br><br><br>
+<style>
+    
+  #accordion-container{
+    margin-left: 380px;
+  }
+</style>
+<div class="course-details">
+  <h2>HSC-SCIENCE LECTURE & NOTES</h2>
+</div>
+
+<div class="side-nav">
+    <div class="nav-header">Word Categories</div>
+    <ul class="nav-menu">
+      <li class="nav-itemm" data-value="Medical">Medical</li>
+      <li class="nav-itemm" data-value="University">University</li>
+      <li class="nav-itemm" data-value="IBA">IBA</li>
+      <li class="nav-itemm" data-value="Word Smart I">Word Smart I</li>
+      <li class="nav-itemm" data-value="Word Smart II">Word Smart II</li>
+      <li class="nav-itemm" data-value="Barrons 333 words">Barrons 333 words</li>
+      <li class="nav-itemm" data-value="Daily Star Newspaper">Daily Star Newspaper</li>
+    </ul>
+  </div>
+
+<div id="accordion-container">
+  
+
+
+
+</div>
+
+<%- include('partials/bottom-nav') %>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.accordion-header').click(function () {
+            var $header = $(this);
+            var $content = $header.next('.accordion-content');
+
+            // Handle subject clicks
+            if ($header.hasClass('accordion-header') && $header.parent().hasClass('accordion-subject')) {
+                // Close all chapters under other subjects
+                $('.accordion-subject').not($header.parent()).find('.accordion-content').slideUp();
+                $('.accordion-chapter').not($header.parent().find('.accordion-chapter')).find('.accordion-content').slideUp();
+
+                // Toggle the current subject
+                $content.slideToggle();
+                $header.toggleClass('active');
+            }
+            
+            // Handle chapter clicks
+            if ($header.hasClass('accordion-header') && $header.parent().hasClass('accordion-chapter')) {
+                // Close all other chapters and their content
+                $header.closest('.accordion-subject').find('.accordion-chapter').not($header.parent()).find('.accordion-content').slideUp();
+
+                // Toggle the current chapter and its content
+                $content.slideToggle();
+                $header.toggleClass('active');
+            }
+        });
+
+        // Load JSON data based on group
+        $(document).ready(function() {
+            var group = '<%= group %>';
+
+            var fileName = group === 'science' ? 'hsc-science.json' :
+                           group === 'commerce' ? 'hsc-commerce.json' :
+                           group === 'arts' ? 'hsc-arts.json' : 
+                           null;
+
+            if (fileName) {
+                $.getJSON('/data/' + fileName, function(data) {
+                    let html = '';
+
+                    $.each(data, function(subject, chapters) {
+                        html += `<div class="accordion accordion-subject">
+                                    <button class="accordion-header">
+                                        ${subject}
+                                        <span class="accordion-arrow"></span>
+                                    </button>
+                                    <div class="accordion-content">`;
+
+                        $.each(chapters, function(index, chapter) {
+                            const chapterTitle = Object.keys(chapter)[0];
+                            const teachers = chapter[chapterTitle];
+
+                            html += `<div class="accordion accordion-chapter">
+                                        <button class="accordion-header">
+                                            ${chapterTitle}
+                                        </button>
+                                        <div class="accordion-content">
+                                            <div class="teacher-list">`;
+
+                            $.each(teachers, function(teacher, videos) {
+                                // Sanitize and encode parameters
+                                const encodedSubject = encodeURIComponent(subject);
+                                const encodedChapterTitle = encodeURIComponent(chapterTitle);
+                                const encodedTeacher = encodeURIComponent(teacher);
+
+                                html += `<a href="/hsc/${group}/lecture?subject=${encodedSubject}&chapter=${encodedChapterTitle}&teacher=${encodedTeacher}">${teacher}</a>`;
+                            });
+
+                            html += `       </div>
+                                        </div>
+                                    </div>`;
+                        });
+
+                        html += `   </div>
+                                </div>`;
+                    });
+
+                       $('#accordion-container').html(html);
+
+                    $('.accordion-header').on('click', function() {
+                        $(this).toggleClass('active');
+                        $(this).next('.accordion-content').toggle();
+                    });
+                }).fail(function() {
+                    console.error('Error loading the JSON data');
+                });
+            } else {
+                console.error('Invalid group value');
+            }
+        });
+    });
+</script>
+
+    </body>
+</html>

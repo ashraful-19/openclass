@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Video Player</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+
+    <style>
+        /* Navbar Styles */
+        header {
+            width: 90%;
+            position: fixed;
+            top: 10px;
+            left: 0;
+            right: 0;
+            z-index: 1444!important;
+            font-family: 'Roboto', sans-serif;
+            margin: 0 auto;
+            display: none;
+        }
+        
+        
+        div.nav-wrap {
+            padding: 5px 15px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            backdrop-filter: blur(10px) brightness(0.8) contrast(1.2) grayscale(0.5) hue-rotate(15deg) invert(0.1) opacity(0.9) saturate(1.5) sepia(0.3) !important;
+        }
+        
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: rgb(0, 0, 0);
+            margin: 0px auto;
+            position: relative;
+            width: 100%;
+        }
+        
+        .logo img {
+            height: 40px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: rgb(101 101 101);
+            text-decoration: none;
+            padding: 5px 10px;
+            margin-left: 10px;
+        }
+        
+        .nav-links a:hover {
+            background-color: #f0f0f0;
+            border-radius: 4px;
+        }
+        
+        .hamburger-menu {
+            display: none;
+            cursor: pointer;
+        }
+        .loader {
+          background: #000;
+          box-shadow: 0 0 0 0 #0004;
+          animation: l1 1s infinite;
+        }
+        @keyframes l1 {
+            100% {box-shadow: 0 0 0 10px #0000}
+        }
+        
+        .new-btn {
+            background-color: rgb(0, 0, 0);
+            border-radius: 5px !important;
+            color: white !important;
+        }
+        
+        .new-btn:hover {
+            background-color: #212121 !important;
+            color: rgb(255, 255, 255) !important;
+        }
+        
+        .side-nav {
+          position: fixed!important;
+          top: 90px!important;
+          left: 50px!important;
+          width: 250px;
+          background-color: #ffffff;
+          padding: 20px;
+          box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+          overflow-y: auto;
+          font-family: 'Roboto', sans-serif;
+          z-index: 1000;
+          display: block;
+          border-radius: 5px;
+        }
+        
+        .nav-header {
+          font-size: 1.5rem;
+          font-weight: bold;
+          margin-bottom: 20px;
+          text-align: center;
+          color: #333;
+        }
+        
+        .nav-menu {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+        
+        .nav-itemm {
+          padding: 10px 15px;
+          margin-bottom: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          border-radius: 4px;
+          color: black!important;
+        }
+        
+        .nav-itemm:hover {
+          background-color: #ddd;
+        }
+        
+        .nav-itemm.active {
+          background-color: #27384d;
+          color: white!important;
+        }
+        
+        </style>  
+<style>
+        *,html {
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: rgb(255, 255, 255)!important;
+        }
+        a, a:hover, a:active, a:link, a:visited {
+  text-decoration: none !important;
+  color: black;
+ }
+
+        .con {
+            position: relative;
+            height: auto;
+            border: none;
+            margin-top: 0; /* Initialize margin-top */
+        }
+        .options {
+    position: fixed;
+    bottom: 85px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1em;
+    flex: 1 1 calc(20% - 10px);
+    min-width: 150px;
+    box-sizing: border-box;
+    max-width: 350px;
+    min-width: 250px;
+    z-index: 122;
+}
+
+
+
+
+        
+select {
+  border: none;
+  outline: none;
+  padding: 6px 6px;
+  margin-bottom: 2px;
+  font-size: 12px;
+  border-radius: 4px;
+width: 100%;
+  font-family: 'Noto Serif Bengali', serif;
+  background-color: rgb(215 232 255 / 49%); 
+  backdrop-filter: blur(3px); 
+  -webkit-backdrop-filter: blur(3px); 
+}
+
+
+ select:focus {
+  border: none;
+  outline: none; 
+}
+/* Remove default styling and add custom styles for option elements */
+option {
+  color: #333333;
+  padding: 20px;
+  border-radius: 10px;
+  border: none;
+  font-size: 12px;
+
+}
+
+/* Optional: Custom arrow styling */
+select::after {
+  content: "▼"; /* Unicode for downward arrow */
+  font-size: 16px;
+  color: #333;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+        #player {
+            position: relative;
+        }
+
+        .video-main-box {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        #video-iframe {
+            height: calc((108vw) * 542 / 1038);
+            border: none;
+        }
+
+        #content{
+            font-family: 'Noto Serif Bengali', serif;
+            
+        }
+        #content h4{
+            padding: 5px 10px;
+            color: #df00ad;
+        }
+    
+        
+        #content h5{
+            padding: 0px 10px;
+            color: #3a51ab;
+        }
+    
+.video-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    }
+
+
+.video-card {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    padding: 5px;
+    transition: background-color 0.3s ease;
+    align-items: flex-start;
+    font-family: 'Noto Serif Bengali', serif;
+
+}
+
+.video-card:hover {
+    background-color: #f5f5f5;
+}
+
+.video-thumbnail {
+    position: relative;
+    width: 100px; 
+    height: calc(100px * 9 / 16);
+    background-color: #ddd;
+    overflow: hidden;
+    border-radius: 5px;
+    flex-shrink: 0; 
+}
+
+.video-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the entire thumbnail without distorting */
+}
+
+.video-duration {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 2px 4px;
+    font-size: 12px;
+    border-radius: 3px;
+}
+
+.video-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: 'Noto Serif Bengali', serif;
+    line-height: 1;
+
+}
+
+.video-title {
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0;
+    color: #333;
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Show ellipsis */
+    display: -webkit-box; /* Use flexbox for multi-line truncation */
+    -webkit-line-clamp: 2; /* Limit to 2 lines */
+    -webkit-box-orient: vertical; /* Stack lines vertically */
+    line-height: 1.4;
+}
+
+
+.video-meta {
+    font-size: 12px;
+    color: #555;
+    margin-top: 5px;
+}
+
+.video-views, .video-year {
+    color: #888;
+}
+
+.active-video {
+    background-color: #e0e0e0; /* Example style for the active video */
+}
+@media (min-width: 768px) {
+  .section {
+    display: flex;
+    flex-direction: row;
+    max-width: 1200px;
+    margin: 0px auto;
+    gap:15px;   
+    margin-left: 5%;
+    margin-right: 5%;
+    }
+
+  .section-1 {
+    flex: 1; 
+  }
+
+  
+  .section-2 {
+    /* width: 33%;  */
+    flex: 1;
+}
+
+        .video-main-box {
+            position: static;
+            top: unset;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        
+#video-iframe {
+    width: 55vw; 
+    height: calc(55.1vw * 9 / 16); 
+    border-radius: 15px;
+    max-width: 1038px;
+    max-height: calc(1038px * 9 / 16); 
+}
+
+
+.video-card{
+    padding: 5px;
+    border-radius: 5px;
+}
+  .options {
+    position: static!important;
+    transform: none;
+    max-width: none;
+    min-width: none;
+  }
+  .options select{
+    padding: 8px;
+    font-size: 14px;
+  }
+
+ #content h4{
+    font-size: 20px!important;
+  }
+
+  
+ #content h5{
+    font-size: 18px;
+  }
+
+  .con {
+    margin-top: 0px!important;
+  }
+  header{
+    display: block!important;
+  }
+
+  nav.bottom-nav{
+    display: none!important;
+  }
+}
+
+
+    </style>
+</head>
+
+
+
+  <header>
+    <div class="nav-wrap">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="Logo">
+                </a>                
+            </div>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="https://www.facebook.com/missionschoolbd">About</a>
+                <a href="https://www.facebook.com/ashraful.ashik19">Contact</a>
+                <a href="/auth/login" class="new-btn loader">Login</a>
+         
+                  
+            </div>
+            <div class="hamburger-menu">
+                <img width="30px" src="https://static.vecteezy.com/system/resources/previews/019/858/597/non_2x/list-flat-color-outline-icon-free-png.png" alt="">
+            </div>
+        </nav>
+    </div>
+</header>
+
+<body>
+    <br><br><br><br>
+    <div class="section">
+    <div class="section-1">
+        <div class="video-main-box" style="z-index: 12;">
+            <div class="video-container-lesson" id="player">
+                <iframe id="video-iframe" width="100%" height="100%" src="" allowfullscreen></iframe>
+            </div>
+        </div>    
+    </div>
+    <div class="section-2">
+        <div class="options">
+            <div class="select-wrapper">
+                <select id="chapter-select" class="custom-select">
+                    <option value="">Select a Chapter</option>
+                </select>
+            
+                <select id="playlist-select" class="custom-select" disabled>
+                    <option value="">Select a Teacher/Playlist</option>
+                </select>
+            </div>
+            
+        </div>
+        
+        <div class="con">
+            <div id="content"></div>
+        </div>
+    </div>
+</div>
+<%- include('partials/bottom-nav') %>
+
+<script>
+    const apiKey = 'AIzaSyCoDEQJW6holKerCuynz7KgfuHJEwCieIM'; // Your API key
+    const data = <%- JSON.stringify(data) %>;
+
+    function sanitizeForClassName(text) {
+        return text
+            .replace(/[^a-zA-Z0-9]/g, '-') // Replace non-alphanumeric characters with a hyphen
+            .replace(/-+/g, '-') // Replace multiple hyphens with a single hyphen
+            .replace(/^-+|-+$/g, '') // Remove leading and trailing hyphens
+            .toLowerCase(); // Convert to lowercase
+    }
+
+    function fetchVideoDetails(videoIds) {
+        return Promise.all(videoIds.map(id =>
+            fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics&id=${id}&key=${apiKey}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.items && data.items.length > 0) {
+                        return data.items[0];
+                    } else {
+                        console.warn(`No data found for video ID: ${id}`);
+                        return null;
+                    }
+                })
+        )).then(videos => videos.filter(video => video !== null));
+    }
+
+    function formatDuration(duration) {
+        const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
+        if (match) {
+            const hours = match[1] ? match[1].replace('H', '') : '';
+            const minutes = match[2] ? match[2].replace('M', '') : '';
+            const seconds = match[3] ? match[3].replace('S', '') : '';
+            return `${hours ? hours + ':' : ''}${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`;
+        }
+        return '0:00';
+    }
+
+    function formatViews(views) {
+        views = parseInt(views, 10);
+        if (views >= 1000000000) {
+            return `${(views / 1000000000).toFixed(1)}B views`;
+        } else if (views >= 1000000) {
+            return `${(views / 1000000).toFixed(1)}M views`;
+        } else if (views >= 1000) {
+            return `${(views / 1000).toFixed(1)}K views`;
+        } else {
+            return `${views} views`;
+        }
+    }
+
+    function displayContent(data) {
+        const content = document.getElementById('content');
+        content.innerHTML = ''; // Clear existing content
+
+        data.forEach(chapter => {
+            Object.keys(chapter).forEach(chapterName => {
+                const chapterDiv = document.createElement('div');
+                
+                const chapterClass = sanitizeForClassName(chapterName);
+                chapterDiv.className = `chapter ${chapterClass}`;
+                chapterDiv.setAttribute('data-chapter-name', chapterName);
+                
+                const chapterHeader = document.createElement('h4');
+                chapterHeader.textContent = chapterName;
+                chapterDiv.appendChild(chapterHeader);
+
+                Object.keys(chapter[chapterName]).forEach(playlistName => {
+                    const playlist = chapter[chapterName][playlistName];
+                    const playlistDiv = document.createElement('div');
+
+                    const playlistClass = sanitizeForClassName(playlistName);
+                    playlistDiv.className = `playlist ${playlistClass}`;
+                    playlistDiv.setAttribute('data-teacher-name', playlistName);
+
+                    const playlistHeader = document.createElement('h5');
+                    playlistHeader.textContent = playlistName;
+                    playlistDiv.appendChild(playlistHeader);
+
+                    const playlistImage = document.createElement('img');
+                    playlistImage.src = playlist.image;
+                    playlistImage.style.maxWidth = '200px';
+                   
+
+                    const videoList = document.createElement('ul');
+                    videoList.className = 'video-list';
+
+                    fetchVideoDetails(playlist.videos).then(videos => {
+                        videos.forEach(video => {
+                            const listItem = document.createElement('li');
+                            listItem.className = 'video-card'; // Add class for styling
+                            listItem.setAttribute('data-video-id', video.id);
+
+                            const thumbnailDiv = document.createElement('div');
+                            thumbnailDiv.className = 'video-thumbnail';
+                            const thumbnailImg = document.createElement('img');
+                            thumbnailImg.src = video.snippet.thumbnails.default.url; // Get the small-sized thumbnail URL
+                            thumbnailImg.alt = video.snippet.title;
+                            thumbnailDiv.appendChild(thumbnailImg);
+
+                            const durationSpan = document.createElement('span');
+                            durationSpan.className = 'video-duration';
+                            durationSpan.textContent = formatDuration(video.contentDetails.duration); // Format duration
+                            thumbnailDiv.appendChild(durationSpan);
+
+                            const infoDiv = document.createElement('div');
+                            infoDiv.className = 'video-info';
+
+                            const titleH3 = document.createElement('h3');
+                            titleH3.className = 'video-title';
+                            titleH3.textContent = video.snippet.title;
+                            infoDiv.appendChild(titleH3);
+
+                            const metaDiv = document.createElement('div');
+                            metaDiv.className = 'video-meta';
+
+                            const viewsSpan = document.createElement('span');
+                            viewsSpan.className = 'video-views';
+                            viewsSpan.textContent = formatViews(video.statistics.viewCount); // Format views
+                            metaDiv.appendChild(viewsSpan);
+
+                            infoDiv.appendChild(metaDiv);
+
+                            listItem.appendChild(thumbnailDiv);
+                            listItem.appendChild(infoDiv);
+
+                            listItem.onclick = function() {
+                                const videoId = this.getAttribute('data-video-id');
+                                const iframe = document.getElementById('video-iframe');
+                                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&iv_load_policy=3&modestbranding=1&rel=0&showinfo=0&rel=0&enablejsapi=1`;
+                            };
+
+                            videoList.appendChild(listItem);
+                        });
+                    });
+
+                    playlistDiv.appendChild(videoList);
+                    chapterDiv.appendChild(playlistDiv);
+                });
+
+                content.appendChild(chapterDiv);
+            });
+        });
+    }
+
+    displayContent(data);
+</script>
+
+
+
+
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const chapterSelect = document.getElementById('chapter-select');
+        const playlistSelect = document.getElementById('playlist-select');
+        const content = document.getElementById('content');
+        const iframe = document.getElementById('video-iframe');
+    
+        // Sanitize function to format strings for class names and data attributes
+        function sanitizeForClassName(text) {
+            return text
+                .replace(/[^a-zA-Z0-9]/g, '-') // Replace non-alphanumeric characters with a hyphen
+                .replace(/-+/g, '-') // Replace multiple hyphens with a single hyphen
+                .replace(/^-+|-+$/g, '') // Remove leading and trailing hyphens
+                .toLowerCase(); // Convert to lowercase
+        }
+    
+        // Populate chapter select
+        data.forEach(chapter => {
+            const chapterName = Object.keys(chapter)[0];
+            const option = document.createElement('option');
+            option.value = chapterName;
+            option.textContent = chapterName;
+            chapterSelect.appendChild(option);
+        });
+    
+        // Update playlist select based on chapter selection
+        chapterSelect.addEventListener('change', () => {
+            const selectedChapter = chapterSelect.value;
+            playlistSelect.innerHTML = '<option value="">Select a Teacher/Playlist</option>'; // Clear previous options
+            playlistSelect.disabled = !selectedChapter; // Enable/disable based on chapter selection
+    
+            if (selectedChapter) {
+                const chapterData = data.find(chapter => chapter[selectedChapter]);
+                if (chapterData) {
+                    const playlists = chapterData[selectedChapter];
+                    Object.keys(playlists).forEach(playlistName => {
+                        const option = document.createElement('option');
+                        option.value = playlistName;
+                        option.textContent = playlistName;
+                        playlistSelect.appendChild(option);
+                    });
+    
+                    // Pre-select the teacher/playlist if available in query params
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const teacher = urlParams.get('teacher');
+                    if (teacher && playlists[teacher]) {
+                        playlistSelect.value = teacher;
+                    }
+                } else {
+                    console.warn(`No data found for chapter: ${selectedChapter}`);
+                }
+            }
+            updateURL(); // Update URL when chapter changes
+        });
+    
+        // Update content based on selected options
+        function updateContent() {
+            const selectedChapter = chapterSelect.value;
+            const selectedTeacher = playlistSelect.value;
+    
+            console.log('Selected Chapter:', selectedChapter, 'Selected Teacher:', selectedTeacher);
+    
+            // Hide all chapters
+            content.querySelectorAll('.chapter').forEach(ch => ch.style.display = 'none');
+    
+            // Show the selected chapter
+            if (selectedChapter) {
+                const chapterDiv = content.querySelector(`.chapter[data-chapter-name="${selectedChapter}"]`);
+                if (chapterDiv) {
+                    chapterDiv.style.display = 'block';
+    
+                    // Hide all playlists within the chapter
+                    chapterDiv.querySelectorAll('.playlist').forEach(pl => pl.style.display = 'none');
+    
+                    // Show the selected playlist
+                    if (selectedTeacher) {
+                        const playlistDiv = chapterDiv.querySelector(`.playlist[data-teacher-name="${selectedTeacher}"]`);
+                        if (playlistDiv) {
+                            playlistDiv.style.display = 'block';
+    
+                            // Remove active class from all video list items
+                            playlistDiv.querySelectorAll('.video-list li').forEach(li => li.classList.remove('active-video'));
+    
+                            // Get the first video ID from the playlist
+                            const firstVideo = playlistDiv.querySelector('.video-list li');
+                            if (firstVideo) {
+                                const videoId = firstVideo.getAttribute('data-video-id');
+                                if (videoId) {
+                                    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&iv_load_policy=3&modestbranding=0&rel=0&showinfo=0&rel=0&enablejsapi=1`;
+    
+                                    // Add active class to the first video
+                                    firstVideo.classList.add('active-video');
+                                } else {
+                                    console.warn('No video ID found for the selected playlist.');
+                                }
+                            }
+                        }
+                    } else {
+                        // Show all playlists if no specific playlist is selected
+                        chapterDiv.querySelectorAll('.playlist').forEach(pl => pl.style.display = 'block');
+    
+                        // Set the iframe source to the first video of the first visible playlist
+                        const firstVisiblePlaylist = chapterDiv.querySelector('.playlist:not([style*="display: none"])');
+                        if (firstVisiblePlaylist) {
+                            const firstVideo = firstVisiblePlaylist.querySelector('.video-list li');
+                            if (firstVideo) {
+                                const videoId = firstVideo.getAttribute('data-video-id');
+                                if (videoId) {
+                                    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&iv_load_policy=3&modestbranding=1&rel=0&showinfo=0&rel=0&enablejsapi=1`;
+    
+                                    // Add active class to the first video
+                                    firstVideo.classList.add('active-video');
+                                } else {
+                                    console.warn('No video ID found for the first visible playlist.');
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            updateURL(); // Update the URL whenever content is updated
+        }
+    
+        // Function to update the URL with selected chapter and teacher
+        function updateURL() {
+            const selectedChapter = chapterSelect.value;
+            const selectedTeacher = playlistSelect.value;
+    
+            // Construct new URL
+            const urlParams = new URLSearchParams(window.location.search);
+            if (selectedChapter) {
+                urlParams.set('chapter', selectedChapter);
+            } else {
+                urlParams.delete('chapter');
+            }
+    
+            if (selectedTeacher) {
+                urlParams.set('teacher', selectedTeacher);
+            } else {
+                urlParams.delete('teacher');
+            }
+    
+            const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+            history.replaceState(null, '', newUrl);
+        }
+    
+        // Add event listeners for chapter and playlist selections
+        chapterSelect.addEventListener('change', updateContent);
+        playlistSelect.addEventListener('change', updateContent);
+    
+        // Add event listener to handle video list item clicks
+        content.addEventListener('click', (event) => {
+            if (event.target.tagName === 'LI' && event.target.parentElement.classList.contains('video-list')) {
+                // Remove active class from all video list items
+                event.target.parentElement.querySelectorAll('li').forEach(li => li.classList.remove('active-video'));
+    
+                // Add active class to the clicked video
+                event.target.classList.add('active-video');
+    
+                // Update iframe source
+                const videoId = event.target.getAttribute('data-video-id');
+                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&iv_load_policy=3&modestbranding=1&rel=0&showinfo=0&rel=0&enablejsapi=1`;
+            }
+        });
+    
+        // Pre-select the chapter and playlist if available in query params
+        const urlParams = new URLSearchParams(window.location.search);
+        const chapter = urlParams.get('chapter');
+        const teacher = urlParams.get('teacher');
+        if (chapter) {
+            chapterSelect.value = chapter;
+            chapterSelect.dispatchEvent(new Event('change'));
+        }
+        if (teacher) {
+            playlistSelect.value = teacher;
+            updateContent(); // Ensure content updates based on pre-selected teacher
+        }
+    
+        // Trigger content update on page load if no chapter/teacher is pre-selected
+        if (!chapter || !teacher) {
+            updateContent();
+        }
+    
+        // Ensure iframe src is updated after DOM is fully loaded
+        window.addEventListener('load', () => {
+            updateContent();
+        });
+    });
+    
+    // Function to handle card clicks
+    function handleCardClick(event) {
+        // Find the closest element with the 'video-card' class (clicked element or its parent)
+        const videoCard = event.target.closest('.video-card');
+        
+        if (videoCard) {
+            console.log('Clicked card:', videoCard); // Debug: Show clicked card
+            
+            // Remove 'active-video' class from all video cards
+            document.querySelectorAll('.video-card').forEach(card => {
+                card.classList.remove('active-video');
+            });
+            
+            // Add 'active-video' class to the clicked card
+            videoCard.classList.add('active-video');
+        } else {
+            console.log('Clicked outside video card'); // Debug: Clicked outside
+        }
+    }
+    
+    document.getElementById('content').addEventListener('click', handleCardClick);
+</script>
+<script>
+    const videoIframe = document.getElementById('video-iframe');
+    const con = document.querySelector('.con');
+
+    function setMarginTop() {
+        // Check if videoIframe and con elements exist
+        if (videoIframe && con) {
+            const videoHeight = videoIframe.offsetHeight-60;
+            con.style.marginTop = `${videoHeight}px`;
+            console.log('Margin Top set to:', videoHeight);
+        } else {
+            console.log('videoIframe or con not found');
+        }
+    }
+
+    setMarginTop(); // initial setting
+
+    window.addEventListener('resize', setMarginTop);
+</script>
+<style>
+    .ytp-chrome-top {
+        display: none!important;
+    }
+</style>
+
+<script>
+    setTimeout(function() {
+        // Hide the chrome top
+        const chromeTop = document.querySelector('.ytp-chrome-top');
+        if (chromeTop) {
+            chromeTop.style.display = 'none';
+        }
+
+        // Hide the title text if not showing ads
+        const titleText = document.querySelector('.ytp-embed:not(.ad-showing) .ytp-title-text');
+        if (titleText) {
+            titleText.style.display = 'none';
+        }
+    }, 5000); // 5000 milliseconds = 5 seconds
+</script>

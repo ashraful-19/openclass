@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- HTML Meta Tags -->
+<title>Material Student - Be your best version</title>
+<meta name="description" content="জরুরী অবস্থায় রক্ত দানে এগিয়ে আসি সবাই, আপনার রক্তদানে বেচে জেতে পারে একটি মানুষের জীবন।">
+
+<!-- Facebook Meta Tags -->
+<meta property="og:url" content="https://roktoo.com">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Roktoo - রক্ত দেই, জীবন বাঁচাই">
+<meta property="og:description" content="জরুরী অবস্থায় রক্ত দানে এগিয়ে আসি সবাই, আপনার রক্তদানে বেচে জেতে পারে একটি মানুষের জীবন।">
+<meta property="og:image" content="https://roktoo.com/images/web-preview-2.png" />
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:domain" content="roktoo.com">
+<meta property="twitter:url" content="https://roktoo.com">
+<meta name="twitter:title" content="Roktoo - Save Lives with Blood Donation">
+<meta name="twitter:description" content="জরুরী অবস্থায় রক্ত দানে এগিয়ে আসি সবাই, আপনার রক্তদানে বেচে জেতে পারে একটি মানুষের জীবন।">
+<meta name="twitter:image" content="https://roktoo.com/images/web-preview-2.png">
+  
+
+  <link href="/images/favicon.png" rel="icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.maateen.me/kalpurush/font.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+    <style>
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+a, a:hover, a:active, a:link, a:visited {
+  text-decoration: none !important;
+  color: black;
+ }
+
+.action-buttons {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.action-buttons button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+
+.search-filters {
+    margin: 20px 0;
+    width: 80%;
+    margin: 20px auto;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;    
+    padding: 15px 15px;
+    border-radius: 10px;
+    display: none;
+    flex-wrap: wrap;
+    gap: 10px;
+
+}
+
+
+
+.search-filters select 
+{
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 1em;
+    margin:0px 10px;
+    background-color: #eeeeee;
+    flex: 1 1 calc(20% - 10px);
+    min-width: 150px;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+select {
+  border: none;
+  outline: none;
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 4px; 
+  font-family: 'Roboto', sans-serif;
+}
+
+ select:focus {
+  border: none;
+  outline: none; 
+}
+/* Remove default styling and add custom styles for option elements */
+option {
+  background-color: #ffffff;
+  color: #333333;
+  padding: 20px;
+  border-radius: 10px;
+  border: none;
+  font-family: 'Roboto', sans-serif;
+
+}
+
+/* Optional: Custom arrow styling */
+select::after {
+  content: "▼"; /* Unicode for downward arrow */
+  font-size: 16px;
+  color: #333;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+
+    .search-filters select {
+        flex: 1 1 100%;
+        margin-bottom: 10px;
+      }
+
+}
+
+@media (max-width: 480px) {
+    .action-buttons button {
+        font-size: 0.8em;
+        padding: 6px 12px;
+        margin: 5px;
+    }
+
+    .search-filters select {
+        padding: 8px;
+        font-size: 0.9em;
+        display: block!important;
+    }
+}
+
+
+
+/* Modal CSS */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* Centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%; 
+    max-width: 600px; 
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+    transform: translateY(-50px); 
+}
+
+.modal-content.show {
+    transform: translateY(0); /* Modal slides in */
+}
+
+.close {
+    color: #000000;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-content label {
+    margin: 10px 0 5px;
+}
+
+.modal-content input,
+.modal-content select {
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 1em;
+    border-radius: 4px;
+    border: 1px solid #d1d1d19e;
+    font-family: 'Roboto', sans-serif;
+}
+
+.modal-content button {
+    padding: 15px;
+    background-color: #E91E63;
+    color: white;
+    border: none;
+    border-radius: 4px; /* Rounded button */
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+    background-color: #fd3579;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 8px 0px;
+
+}
+
+
+
+
+/* Navbar Styles */
+
+.new-btn {
+    background-color: rgb(0, 0, 0);
+    border-radius: 5px !important;
+    color: white !important;
+}
+
+.new-btn:hover {
+    background-color: #212121 !important;
+    color: rgb(255, 255, 255) !important;
+}
+
+.side-nav {
+  position: fixed!important;
+  top: 90px!important;
+  left: 50px!important;
+  width: 250px;
+  background-color: #ffffff;
+  padding: 20px;
+  border: 1px solid #e9e9e9;
+  overflow-y: auto;
+  font-family: 'Roboto', sans-serif;
+  z-index: 1000;
+  display: block;
+  border-radius: 5px;
+}
+
+.nav-header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+.nav-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-itemm {
+  padding: 10px 15px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 4px;
+  color: black!important;
+}
+
+.nav-itemm:hover {
+  background-color: #ddd;
+}
+
+.nav-itemm.active {
+  background-color: #27384d;
+  color: white!important;
+}
+
+</style>
+</head>
+
+<body>
+                             
+<br><br><br><br>
+<%- include('partials/top-nav') %>
+
+    <main>
+
+      <div class="search-filters">
+        <h2 style="text-align: center; width: 100%; font-family: 'Roboto';">Word Category</h2>
+        <select id="word-group-search" name="word-group" class="loader">
+          <option value="Medical">Medical</option>
+          <option value="University">University</option>
+          <option value="IBA">IBA</option>
+          <option value="Word Smart I">Word Smart I</option>
+          <option value="Word Smart II">Word Smart II</option>
+          <option value="Barrons 333 words">Barrons 333 words</option>
+          <option value="Daily Star News paper">Daily Star Newspaper</option>
+        </select>
+      </div>
+      
+      <div class="side-nav">
+        <div class="nav-header">Word Categories</div>
+        <ul class="nav-menu">
+          <li class="nav-itemm" data-value="Medical">Medical</li>
+          <li class="nav-itemm" data-value="University">University</li>
+          <li class="nav-itemm" data-value="IBA">IBA</li>
+          <li class="nav-itemm" data-value="Word Smart I">Word Smart I</li>
+          <li class="nav-itemm" data-value="Word Smart II">Word Smart II</li>
+          <li class="nav-itemm" data-value="Barrons 333 words">Barrons 333 words</li>
+          <li class="nav-itemm" data-value="Daily Star Newspaper">Daily Star Newspaper</li>
+        </ul>
+      </div>
+
+      <div id="content-loader" style="display: none;">Loading...</div>
+      <div id="content"></div>
+<style>
+  /* Loader styles */
+#content-loader {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #333;
+  padding: 20px;
+  display: none; /* Hidden by default */
+  height: 100vh;
+}
+
+
+</style>      
+
+
+ 
+
+      <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+      <script>
+$(document).ready(function() {
+  const contentDiv = $('#content');
+  const loaderDiv = $('#content-loader');
+
+  // Function to handle adding/removing the active class
+  function updateActiveClass(selectedCategory) {
+    // Remove .active from all nav items
+    $('.nav-itemm').removeClass('active');
+    $('#word-group-search option').removeAttr('selected');
+
+    // Add .active to the clicked or selected nav item
+    $(`.nav-itemm[data-value="${selectedCategory}"]`).addClass('active');
+    $(`#word-group-search option[value="${selectedCategory}"]`).attr('selected', true);
+  }
+
+  function renderContent(categoryData) {
+    contentDiv.empty(); // Clear existing content
+
+    categoryData.forEach(item => {
+      if (item.word) {
+        contentDiv.append(`
+          <div class="word">
+            <div class="vocabulary-card">
+              <h3 class="vocab-word">
+                ${item.word.word} <span class="translation">- ${item.word.translation}</span>
+              </h3>
+              <div class="vocab-info">
+                <span class="vocab-items"><strong>Synonyms: </strong> ${item.word.synonyms.join(', ')}</span>
+                <span class="vocab-items"><strong>Antonyms: </strong> ${item.word.antonyms.join(', ')}</span>
+              </div>
+            </div>
+            <button class="toggle-story">বিস্তারিত</button>
+            <div class="story-block">${item.word['story-block']}</div>
+          </div>`);
+      } else if (item.title) {
+        contentDiv.append(`<div class="title"><h2>${item.title}</h2></div>`);
+      } else if (item['title-extra']) {
+        contentDiv.append(`
+         <div class="title-extra">
+        ${item['title-extra'].title ? `<h2>${item['title-extra'].title}</h2>` : ''}
+        ${item['title-extra'].content ? `<span class="extra-content">${item['title-extra'].content}<br></span>` : ''}
+        ${item['title-extra'].image ? `<img src="${item['title-extra'].image}" style="border-radius: 8px; width: 100%!important">` : ''}
+      </div>`);
+      }
+    });
+
+    // Add event listener for toggle buttons
+    $('.toggle-story').on('click', function() {
+      $(this).next('.story-block').slideToggle(); // Toggle the story block visibility
+    });
+  }
+
+  function loadContent(category) {
+    // Show loader
+    loaderDiv.show();
+    contentDiv.hide();
+
+    // Update active class
+    updateActiveClass(category);
+
+    // Simulate loading with a 3-second delay
+    setTimeout(() => {
+      $.getJSON('/data/word.json', function(data) {
+        renderContent(data[category]);
+        // Hide loader and show content
+        loaderDiv.hide();
+        contentDiv.show();
+      });
+    }, 1000); // 3 seconds delay
+  }
+
+  // Initial load - set the first item as active
+  const initialCategory = 'Medical'; // Default selection
+  loadContent(initialCategory); // Load content for the initial category
+
+  // Handle search filter dropdown change
+  $('#word-group-search').on('change', function() {
+    const selectedCategory = $(this).val();
+    loadContent(selectedCategory);
+  });
+
+  // Handle side-nav click events
+  $('.nav-itemm').on('click', function() {
+    const selectedCategory = $(this).data('value');
+    loadContent(selectedCategory);
+  });
+});
+
+</script>
+
+<style>
+
+  #content{
+    margin-left: 350px;
+  }
+
+  .word,.title-extra{
+    border: 1px solid #e9e9e9;
+    padding: 10px;
+    margin: 8px auto;
+    margin-left: 7%;
+    margin-right: 7%;
+    background-color: white;
+    border-radius: 5px;
+    font-family: "Roboto"!important;
+    }
+    .title{
+    padding: 0px 10px;
+    margin: 0px auto;
+    margin-top: 60px;
+    width: 84%;
+    background-color: white;
+    font-family: "Roboto"!important;
+    color: #040627; 
+  }
+
+    .title-extra h3{
+    margin: 0px auto!important;
+    margin-bottom: 5px!important;
+    font-family: "Hind Siliguri"!important;
+    
+    }
+    .title-extra span{
+    font-family: "Hind Siliguri";
+  }
+  .vocab-word{
+    margin: 0px!important;
+    font-size: 18px;
+
+  }
+ .vocab-info{
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+  }
+  .translation{
+    font-family: "Kalpurush";
+  }
+  .vocab-items strong{
+    margin-right: 5px;
+  }
+  .vocab-items{
+    margin: 5px 0px;
+  }
+
+.toggle-story {
+    background-color: #27384d;
+    color: white;
+    padding: 5px 25px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-story:hover {
+    background-color: #27384d;
+}
+
+.story-block {
+    display: none;
+    padding-top: 10px;
+    font-size: 14px;
+    transition: max-height 0.3s ease;
+}
+
+@media screen and (max-width: 768px) {
+  /* Hide the side navigation */
+  .side-nav {
+    display: none;
+  }
+
+  /* Make the content take the full width */
+  #content {
+    margin-left: 0;
+  }
+
+  /* Make the search filters display as flex */
+  .search-filters {
+    display: flex;
+  }
+}
+@media (min-width: 1420px) {
+  .side-nav {
+    left: 75px!important;
+  }
+}
+</style>   
+
+</main>
+<br><br><br>
+
+ <%- include('partials/bottom-nav') %>
+
+<!-- Modal Structure -->
+<div id="donor-modal" class="modal">
+    <div class="modal-content">
+      <button class="close">Skip </button>
+      <h2 style="padding-right: 30px;"> <span style="color:red">রক্তদাতা</span> হতে চাইলে ফিলাপ করুন নাহলে স্কিপ করুন</h2>
+        <form id="donor-form">
+            <input type="text" id="name" name="name" placeholder="Ex: Md Ashraful Islam" required>
+            <select id="blood-group" name="blood-group" required>
+              <option value="">Choice Blood</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+            </select>
+
+            <select id="division" name="division" required>
+                <option value="">Choice Division</option>
+            </select>
+
+            <select id="district" name="district" required>
+                <option value="">Choice District</option>
+            </select>
+
+            <select id="upazila" name="upazila" required>
+                <option value="">Choice City/Upazila</option>
+            </select>
+
+            <input type="tel" id="phone" name="phone" placeholder="Enter Phone number" required>
+
+            <input type="text" id="fb-id" name="fb-id" placeholder="Facebook Id link (Optional)">
+            
+            <input type="text" id="age" name="age" placeholder="Your age" required>
+
+            <label for="past-donation">আগে রক্ত দিয়েছিলেন:</label>
+            <div class="past-donation-wrap">
+                <label><input type="radio" name="past-donation" value="Yes" required> Yes</label>
+                <label><input type="radio" name="past-donation" value="No" required> No</label>
+            </div>
+            <br>
+            <div id="last-donation-container" class="hidden modal-content">
+                <label for="last-donation">শেষ রক্তদানের সময়:</label>
+                <input type="date" id="last-donation" name="last-donation">
+                <br>
+                <label for="donated">কতবার দিয়েছিলেন:</label>
+                <input type="text" id="donated" name="donated">
+  
+              </div>
+            <label>Profession:</label>
+            <div class="profession-wrap">
+                <label><input type="radio" name="profession" value="Student" required> Student</label>
+                <label><input type="radio" name="profession" value="Worker" required> Job</label>
+            </div>
+            <br>
+            <input type="text" id="institute" name="institute" placeholder="Institute(Working Place/University) (Optional)">
+
+            <br>
+            <button type="submit" id="submit-donor-form">Submit</button>
+            <div class="loading-overlay">
+                <div class="loader-1"></div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<footer>
+    <p>&copy; 2024 Developed by Md Ashraful Islam</p>
+</footer>
+
+
+</body>
+</html>
+
+
+<script>
+  $(document).ready(function() {
+    $('.hamburger-menu').click(function() {
+        $('.mobile-nav').slideToggle(300); // 300ms for the slide animation
+    });
+});
+
+</script>
+
+
+
